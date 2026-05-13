@@ -1,5 +1,14 @@
+#!/usr/bin/env php
 <?php
 
-return [
-    App\Providers\AppServiceProvider::class,
-];
+use Symfony\Component\Console\Input\ArgvInput;
+
+define('LARAVEL_START', microtime(true));
+
+// Register the Composer autoloader...
+require __DIR__.'/vendor/autoload.php';
+
+$status = (require_once __DIR__.'/bootstrap/app.php')
+    ->handleCommand(new ArgvInput);
+
+exit($status);
